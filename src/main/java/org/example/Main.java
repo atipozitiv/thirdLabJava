@@ -1,8 +1,5 @@
 package org.example;
 
-import com.sun.jdi.Value;
-
-import java.security.Key;
 import java.util.*;
 
 public class Main {
@@ -48,9 +45,9 @@ public class Main {
         System.out.println(myList + "\nСдвинутый на 1 элемент список\n");
 
         ArrayList<Integer> listWithoutRepeats = new ArrayList<>();   //g
-        for (int turn = 0; turn < myList.size(); ++turn) {
-            if (!listWithoutRepeats.contains(myList.get(turn))) {
-                listWithoutRepeats.add(myList.get(turn));
+        for (Integer integer : myList) {
+            if (!listWithoutRepeats.contains(integer)) {
+                listWithoutRepeats.add(integer);
             }
         }
         System.out.println(listWithoutRepeats + "\nСписок только с уникальными элементами\n");
@@ -111,17 +108,14 @@ public class Main {
         TreeSet<Human> emptyTreeSet = new TreeSet<>(new HumanComporatorByLastName());
         emptyTreeSet.addAll(humans);
         System.out.println(emptyTreeSet);
-        TreeSet<Human> emptyAnonTreeSet = new TreeSet<>(new Comparator<Human>() {
-            @Override
-            public int compare(Human o1, Human o2) {
-                if (o1.age > o2.age) {
-                    return 1;
-                }
-                if (o1.age < o2.age) {
-                    return -1;
-                }
-                return 0;
+        TreeSet<Human> emptyAnonTreeSet = new TreeSet<>((o1, o2) -> {
+            if (o1.age > o2.age) {
+                return 1;
             }
+            if (o1.age < o2.age) {
+                return -1;
+            }
+            return 0;
         });
         emptyAnonTreeSet.addAll(humans);
         System.out.println(emptyAnonTreeSet);
@@ -134,8 +128,8 @@ public class Main {
         input = input.toLowerCase();
         HashMap<String, Integer> myHashMap = new HashMap<>();
         String[] inputToWords = input.split(" ");
-        for (int turn = 0; turn < inputToWords.length; ++turn) {
-            myHashMap.put(inputToWords[turn], myHashMap.getOrDefault(inputToWords[turn], 0) + 1);
+        for (String inputToWord : inputToWords) {
+            myHashMap.put(inputToWord, myHashMap.getOrDefault(inputToWord, 0) + 1);
         }
         System.out.println(myHashMap + "\n\n\n");
     }
